@@ -1,0 +1,20 @@
+{
+  "name": "crypto-txn-ingest",
+  "version": "1.0.0",
+  "description": "Backend service for ingesting and validating crypto transaction CSV files",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "csv-parse": "^5.5.6",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.1",
+    "multer": "^2.1.1"
+  },
+  "devDependencies": {
+    "supertest": "^7.0.0"
+  }
+}
