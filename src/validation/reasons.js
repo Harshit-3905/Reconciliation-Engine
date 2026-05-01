@@ -31,6 +31,14 @@ const REASONS = {
   INVALID_FILE_ID: 'Invalid file id',
   INVALID_FILE_TYPE: 'Invalid file type: only CSV files are accepted',
   EMPTY_FILE: 'Uploaded file is empty',
+
+  // Reconciliation
+  USER_FILE_REQUIRED: 'User file is required. Use multipart field "userFile".',
+  EXCHANGE_FILE_REQUIRED: 'Exchange file is required. Use multipart field "exchangeFile".',
+  USER_FILE_EMPTY: 'User file is empty',
+  EXCHANGE_FILE_EMPTY: 'Exchange file is empty',
+  RECONCILIATION_NOT_FOUND: 'Reconciliation report not found',
+  INVALID_REPORT_ID: 'Invalid report id',
 };
 
 // Helpers that append the offending value for diagnostics.

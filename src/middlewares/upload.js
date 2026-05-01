@@ -45,4 +45,32 @@ function requireNonEmptyFile(req, _res, next) {
   next();
 }
 
-module.exports = { upload, requireNonEmptyFile };
+/**
+ * Accept exactly two CSV files (userFile + exchangeFile) for reconciliation.
+ */
+const uploadPair = upload.fields([
+  { name: 'userFile', maxCount: 1 },
+  { name: 'exchangeFile', maxCount: 1 },
+]);
+
+/**
+ * Enforce that both files were attached and are non-empty.
+ * Runs after `uploadPair`.
+ */
+function requireBothFiles(req, _res, next) {
+  const userFile = req.files && req.files.userFile && req.files.userFile[0];
+  const exchangeFile = req.files && req.files.exchangeFile && req.files.exchangeFile[0];
+
+  if (!userFile) return next(new ValidationError(REASONS.USER_FILE_REQUIRED));
+  if (!exchangeFile) return next(new ValidationError(REASONS.EXCHANGE_FILE_REQUIRED));
+
+  if (!userFile.buffer || userFile.buffer.length === 0) {
+    return next(new ValidationError(REASONS.USER_FILE_EMPTY));
+  }
+  if (!exchangeFile.buffer || exchangeFile.buffer.length === 0) {
+    return next(new ValidationError(REASONS.EXCHANGE_FILE_EMPTY));
+  }
+  next();
+}
+
+module.exports = { upload, requireNonEmptyFile, uploadPair, requireBothFiles };
